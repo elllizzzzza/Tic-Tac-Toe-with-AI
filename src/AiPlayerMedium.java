@@ -7,7 +7,6 @@ public class AiPlayerMedium implements Player {
         this.symbol = symbol;
     }
 
-
     @Override
     public void makeMove(char[][] board) {
         System.out.println("Making move level \"medium\"");
@@ -15,13 +14,11 @@ public class AiPlayerMedium implements Player {
         if (tryToWinOrBlock(board, symbol)) return;
 
         char opponent;
-        if(symbol == 'X') opponent = 'O';
-        else opponent = 'X';
+        opponent = (symbol == 'X') ? 'O' : 'X';
         if (tryToWinOrBlock(board, opponent)) return;
 
         fallbackMove(board);
     }
-
 
     private boolean tryToWinOrBlock(char[][] board, char s) {
         for (int i = 0; i < 3; i++) {
@@ -35,7 +32,6 @@ public class AiPlayerMedium implements Player {
                 }
             }
 
-
             if (checkLine(board[0][i], board[1][i], board[2][i], s)) {
                 for (int j = 0; j < 3; j++) {
                     if (board[j][i] == ' ') {
@@ -45,7 +41,6 @@ public class AiPlayerMedium implements Player {
                 }
             }
         }
-
 
         if (checkLine(board[0][0], board[1][1], board[2][2], s)) {
             if (board[0][0] == ' ') {
@@ -111,4 +106,3 @@ public class AiPlayerMedium implements Player {
         board[x][y] = symbol;
     }
 }
-

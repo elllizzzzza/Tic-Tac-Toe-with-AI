@@ -15,7 +15,7 @@ public class Main {
             String[] parts = input.split("\\s+");
 
             if (parts[0].equals("exit")) {
-                break;
+                return;
             } else if (parts[0].equals("start")) {
                 if (parts.length != 3) {
                     System.out.println("Bad parameters!");
@@ -31,7 +31,6 @@ public class Main {
                 }
             }
         }
-
 
         Game game = new Game();
         game.initializeEmptyBoard();
@@ -51,7 +50,6 @@ public class Main {
         }
         System.out.println(game.checkWin());
     }
-
 
     public static Player createPlayer(String type, char symbol) {
         switch (type.toLowerCase()) {

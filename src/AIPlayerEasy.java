@@ -3,7 +3,6 @@ import java.util.Random;
 public class AIPlayerEasy implements Player{
     private char symbol;
 
-
     public AIPlayerEasy(char symbol) {
         this.symbol = symbol;
     }

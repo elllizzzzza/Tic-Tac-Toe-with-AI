@@ -2,8 +2,7 @@ import java.util.Scanner;
 
 public class UserPlayer implements Player{
     private char symbol;
-//    private int[] coord = new int[2];
-
+    private static final Scanner scanner = new Scanner(System.in);
 
     public UserPlayer(char symbol) {
         this.symbol = symbol;
@@ -24,15 +23,14 @@ public class UserPlayer implements Player{
         int y = coord[1];
         while (board[x-1][y-1] != ' '){
             System.out.println("This cell is occupied! Choose another one!");
-            enterCoordinates();
+            coord = enterCoordinates();
+            x = coord[0];
+            y = coord[1];
         }
         board[x-1][y-1] = symbol;
     }
 
-
-
     public static int[] enterCoordinates() {
-        Scanner scanner = new Scanner(System.in);
         int[] coord = new int[2];
 
         boolean valid = false;
@@ -58,5 +56,3 @@ public class UserPlayer implements Player{
         return coord;
     }
 }
-
-

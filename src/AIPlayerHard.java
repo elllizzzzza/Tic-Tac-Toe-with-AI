@@ -26,23 +26,23 @@ public class AIPlayerHard implements Player {
                 }
             }
         }
-
         board[coordX][coordY] = symbol;
     }
 
     private int minimax(char[][] board, int depth, boolean isMaximizing) {
         char opponent;
-        if(symbol == 'X') opponent = 'O';
-        else opponent = 'X';
+        opponent = (symbol == 'X') ? 'O' : 'X';
 
         String result = evaluateBoard(board);
         if (result != null) {
             switch (result) {
-                case "win": return 10 - depth;
-                case "lose": return -10 + depth;
-                case "draw": return 0;
+                case "win":
+                    return 10 - depth;
+                case "lose":
+                    return -10 + depth;
+                case "draw":
+                    return 0;
             }
-
         }
 
         if (isMaximizing) {
@@ -74,14 +74,11 @@ public class AIPlayerHard implements Player {
         }
     }
 
-
-
     private String evaluateBoard(char[][] board) {
         for (int i = 0; i < 3; i++) {
             if (board[i][0] != ' ' && board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
                 return (board[i][0] == symbol) ? "win" : "lose";
             }
-
             if (board[0][i] != ' ' && board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
                 return (board[0][i] == symbol) ? "win" : "lose";
             }
@@ -94,7 +91,6 @@ public class AIPlayerHard implements Player {
         if (board[0][2] != ' ' && board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
             return (board[0][2] == symbol) ? "win" : "lose";
         }
-
 
         boolean isFull = true;
         for (int i = 0; i < 3; i++) {
