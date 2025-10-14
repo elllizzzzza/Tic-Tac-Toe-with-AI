@@ -1,7 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Tic-Tac-Toe-with-AI,org.example,Main,150,0,21,0,43,0,15,0,3,0
-Tic-Tac-Toe-with-AI,org.example,Game,2,243,1,39,1,33,2,26,1,7
-Tic-Tac-Toe-with-AI,org.example,AIPlayerHard,49,361,14,58,3,61,10,31,0,4
-Tic-Tac-Toe-with-AI,org.example,AiPlayerMedium,2,327,6,48,1,63,6,26,0,5
-Tic-Tac-Toe-with-AI,org.example,AIPlayerEasy,0,37,1,1,0,10,1,2,0,2
-Tic-Tac-Toe-with-AI,org.example,UserPlayer,19,98,4,8,7,26,6,6,2,4
