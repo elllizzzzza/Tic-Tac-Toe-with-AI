@@ -1,0 +1,5 @@
+org/example/UserPlayerTest.class
+org/example/AiPlayerMediumTest.class
+org/example/GameTest.class
+org/example/AIPlayerHardTest.class
+org/example/AIPlayerEasyTest.class

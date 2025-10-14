@@ -1,19 +1,27 @@
+package org.example;
+
 public class AIPlayerHard implements Player {
-    private char symbol;
+    private static final int MAX_INPUT_VALUE = 3;
+    private static final int SCORE_WIN = 10;
+    private static final int SCORE_LOSS = -10;
+    private static final int SCORE_DRAW = 0;
+
+
+    private final char symbol;
 
     public AIPlayerHard(char symbol) {
         this.symbol = symbol;
     }
 
     @Override
-    public void makeMove(char[][] board) {
+    public void makeMove(final char[][] board) {
         System.out.println("Making move level \"hard\"");
         int bestScore = Integer.MIN_VALUE;
         int coordX = -1;
         int coordY = -1;
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < MAX_INPUT_VALUE; i++) {
+            for (int j = 0; j < MAX_INPUT_VALUE; j++) {
                 if (board[i][j] == ' ') {
                     board[i][j] = symbol;
                     int score = minimax(board, 0, false);
@@ -29,7 +37,8 @@ public class AIPlayerHard implements Player {
         board[coordX][coordY] = symbol;
     }
 
-    private int minimax(char[][] board, int depth, boolean isMaximizing) {
+    private int minimax(final char[][] board, final int depth,
+                        final boolean isMaximizing) {
         char opponent;
         opponent = (symbol == 'X') ? 'O' : 'X';
 
@@ -37,18 +46,20 @@ public class AIPlayerHard implements Player {
         if (result != null) {
             switch (result) {
                 case "win":
-                    return 10 - depth;
+                    return SCORE_WIN - depth;
                 case "lose":
-                    return -10 + depth;
+                    return SCORE_LOSS + depth;
                 case "draw":
+                    return SCORE_DRAW;
+                default:
                     return 0;
             }
         }
 
         if (isMaximizing) {
             int bestScore = Integer.MIN_VALUE;
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < MAX_INPUT_VALUE; i++) {
+                for (int j = 0; j < MAX_INPUT_VALUE; j++) {
                     if (board[i][j] == ' ') {
                         board[i][j] = symbol;
                         int score = minimax(board, depth + 1, false);
@@ -60,8 +71,8 @@ public class AIPlayerHard implements Player {
             return bestScore;
         } else {
             int bestScore = Integer.MAX_VALUE;
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < MAX_INPUT_VALUE; i++) {
+                for (int j = 0; j < MAX_INPUT_VALUE; j++) {
                     if (board[i][j] == ' ') {
                         board[i][j] = opponent;
                         int score = minimax(board, depth + 1, true);
@@ -74,35 +85,41 @@ public class AIPlayerHard implements Player {
         }
     }
 
-    private String evaluateBoard(char[][] board) {
-        for (int i = 0; i < 3; i++) {
-            if (board[i][0] != ' ' && board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
+    private String evaluateBoard(final char[][] board) {
+        for (int i = 0; i < MAX_INPUT_VALUE; i++) {
+            if (board[i][0] != ' ' && board[i][0] == board[i][1]
+                    && board[i][1] == board[i][2]) {
                 return (board[i][0] == symbol) ? "win" : "lose";
             }
-            if (board[0][i] != ' ' && board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
+            if (board[0][i] != ' ' && board[0][i] == board[1][i]
+                    && board[1][i] == board[2][i]) {
                 return (board[0][i] == symbol) ? "win" : "lose";
             }
         }
 
-        if (board[0][0] != ' ' && board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+        if (board[0][0] != ' ' && board[0][0] == board[1][1]
+                && board[1][1] == board[2][2]) {
             return (board[0][0] == symbol) ? "win" : "lose";
         }
 
-        if (board[0][2] != ' ' && board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
+        if (board[0][2] != ' ' && board[0][2] == board[1][1]
+                && board[1][1] == board[2][0]) {
             return (board[0][2] == symbol) ? "win" : "lose";
         }
 
         boolean isFull = true;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < MAX_INPUT_VALUE; i++) {
+            for (int j = 0; j < MAX_INPUT_VALUE; j++) {
                 if (board[i][j] == ' ') {
                     isFull = false;
+                    break;
                 }
             }
         }
 
-        if(isFull) return "draw";
-
+        if (isFull) {
+            return "draw";
+        }
         return null;
     }
 }

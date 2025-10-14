@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AiPlayerMedium.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Tic-Tac-Toe-with-AI</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">AiPlayerMedium.java</span></div><h1>AiPlayerMedium.java</h1><pre class="source lang-java linenums">package org.example;
+
+import java.util.Random;
+
+public class AiPlayerMedium implements Player {
+    private static final int MAX_INPUT_VALUE = 3;
+
+    private final char symbol;
+
+<span class="fc" id="L10">    public AiPlayerMedium(char symbol) {</span>
+<span class="fc" id="L11">        this.symbol = symbol;</span>
+<span class="fc" id="L12">    }</span>
+
+    @Override
+    public void makeMove(final char[][] board) {
+<span class="fc" id="L16">        System.out.println(&quot;Making move level \&quot;medium\&quot;&quot;);</span>
+
+<span class="fc bfc" id="L18" title="All 2 branches covered.">        if (tryToWinOrBlock(board, symbol)) {</span>
+<span class="fc" id="L19">            return;</span>
+        }
+
+        char opponent;
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">        opponent = (symbol == 'X') ? 'O' : 'X';</span>
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if (tryToWinOrBlock(board, opponent)) {</span>
+<span class="nc" id="L25">            return;</span>
+        }
+<span class="fc" id="L27">        fallbackMove(board);</span>
+<span class="fc" id="L28">    }</span>
+
+    private boolean tryToWinOrBlock(final char[][] board, final char s) {
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        for (int i = 0; i &lt; MAX_INPUT_VALUE; i++) {</span>
+
+<span class="fc bfc" id="L33" title="All 2 branches covered.">            if (checkLine(board[i][0], board[i][1], board[i][2], s)) {</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">                for (int j = 0; j &lt; MAX_INPUT_VALUE; j++) {</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">                    if (board[i][j] == ' ') {</span>
+<span class="fc" id="L36">                        board[i][j] = symbol;</span>
+<span class="fc" id="L37">                        return true;</span>
+                    }
+                }
+            }
+
+<span class="fc bfc" id="L42" title="All 2 branches covered.">            if (checkLine(board[0][i], board[1][i], board[2][i], s)) {</span>
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">                for (int j = 0; j &lt; MAX_INPUT_VALUE; j++) {</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">                    if (board[j][i] == ' ') {</span>
+<span class="fc" id="L45">                        board[j][i] = symbol;</span>
+<span class="fc" id="L46">                        return true;</span>
+                    }
+                }
+            }
+        }
+
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (checkLine(board[0][0], board[1][1], board[2][2], s)) {</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            if (board[0][0] == ' ') {</span>
+<span class="fc" id="L54">                board[0][0] = symbol;</span>
+<span class="fc" id="L55">                return true;</span>
+            }
+
+<span class="fc bfc" id="L58" title="All 2 branches covered.">            if (board[1][1] == ' ') {</span>
+<span class="fc" id="L59">                board[1][1] = symbol;</span>
+<span class="fc" id="L60">                return true;</span>
+            }
+
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">            if (board[2][2] == ' ') {</span>
+<span class="fc" id="L64">                board[2][2] = symbol;</span>
+<span class="fc" id="L65">                return true;</span>
+            }
+        }
+
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        if (checkLine(board[0][2], board[1][1], board[2][0], s)) {</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">            if (board[0][2] == ' ') {</span>
+<span class="fc" id="L71">                board[0][2] = symbol;</span>
+<span class="fc" id="L72">                return true;</span>
+            }
+
+<span class="fc bfc" id="L75" title="All 2 branches covered.">            if (board[1][1] == ' ') {</span>
+<span class="fc" id="L76">                board[1][1] = symbol;</span>
+<span class="fc" id="L77">                return true;</span>
+            }
+
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">            if (board[2][0] == ' ') {</span>
+<span class="fc" id="L81">                board[2][0] = symbol;</span>
+<span class="fc" id="L82">                return true;</span>
+            }
+        }
+
+<span class="fc" id="L86">        return false;</span>
+    }
+
+    private boolean checkLine(final char a, final char b, final char c, final char s) {
+<span class="fc" id="L90">        int countS = 0;</span>
+<span class="fc" id="L91">        int countEmpty = 0;</span>
+
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (a == s) {</span>
+<span class="fc" id="L94">            countS++;</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        } else if (a == ' ') {</span>
+<span class="fc" id="L96">            countEmpty++;</span>
+        }
+
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        if (b == s) {</span>
+<span class="fc" id="L100">            countS++;</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        } else if (b == ' ') {</span>
+<span class="fc" id="L102">            countEmpty++;</span>
+        }
+
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        if (c == s) {</span>
+<span class="fc" id="L106">            countS++;</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        } else if (c == ' ') {</span>
+<span class="fc" id="L108">            countEmpty++;</span>
+        }
+<span class="fc bfc" id="L110" title="All 4 branches covered.">        return countS == 2 &amp;&amp; countEmpty == 1;</span>
+    }
+
+    private void fallbackMove(final char[][] board) {
+        int x, y;
+<span class="fc" id="L115">        Random random = new Random();</span>
+        do {
+<span class="fc" id="L117">            x = random.nextInt(MAX_INPUT_VALUE);</span>
+<span class="fc" id="L118">            y = random.nextInt(MAX_INPUT_VALUE);</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        } while (board[x][y] != ' ');</span>
+
+<span class="fc" id="L121">        board[x][y] = symbol;</span>
+<span class="fc" id="L122">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

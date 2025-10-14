@@ -1,6 +1,10 @@
+package org.example;
+
 import java.util.Scanner;
 
-public class UserPlayer implements Player{
+public class UserPlayer implements Player {
+    private static final int MAX_INPUT_VALUE = 3;
+
     private char symbol;
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -21,13 +25,13 @@ public class UserPlayer implements Player{
         int[] coord = enterCoordinates();
         int x = coord[0];
         int y = coord[1];
-        while (board[x-1][y-1] != ' '){
-            System.out.println("This cell is occupied! Choose another one!");
+        while (board[x - 1][y - 1] != ' ') {
+            System.out.println("This cell is occupied! " + "Choose another one!");
             coord = enterCoordinates();
             x = coord[0];
             y = coord[1];
         }
-        board[x-1][y-1] = symbol;
+        board[x - 1][y - 1] = symbol;
     }
 
     public static int[] enterCoordinates() {
@@ -41,7 +45,8 @@ public class UserPlayer implements Player{
             try {
                 x = scanner.nextInt();
                 y = scanner.nextInt();
-                if (!((x > 0 && x < 4) && (y > 0 && y < 4))) {
+                if (!(x > 0 && x <= MAX_INPUT_VALUE && y > 0
+                        && y <= MAX_INPUT_VALUE)) {
                     System.out.println("Coordinates should be from 1 to 3!");
                 } else {
                     valid = true;

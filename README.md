@@ -7,7 +7,7 @@ Project Overview
 
 Java
 
-🕹️ Game Modes:
+🕹️ main.java.org.example.Game Modes:
 
 User vs User
 
@@ -41,7 +41,7 @@ Determine turn based on board state.
 
 Display game outcome:
 
-Game not finished, X wins, O wins, Draw
+main.java.org.example.Game not finished, X wins, O wins, Draw
 
 ✅ Stage 2: Add Easy AI
 
@@ -53,7 +53,7 @@ Alternating turns until win/draw.
 
 Handles input errors gracefully.
 
-✅ Stage 3: Game Menu & Player Configuration
+✅ Stage 3: main.java.org.example.Game Menu & main.java.org.example.Player Configuration
 
 Add a command-based menu:
 
@@ -61,7 +61,7 @@ start
 
 exit to quit the game
 
-Player types:
+main.java.org.example.Player types:
 
 user, easy
 

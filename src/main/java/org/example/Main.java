@@ -1,11 +1,17 @@
+package org.example;
+
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        final int MAX_INPUT_VALUE = 3;
+
         Scanner scanner = new Scanner(System.in);
         String input;
 
-        Player player1 = null, player2= null;
+        Player player1 = null;
+        Player player2 = null;
 
         boolean valid = false;
         while (!valid) {
@@ -17,9 +23,9 @@ public class Main {
             if (parts[0].equals("exit")) {
                 return;
             } else if (parts[0].equals("start")) {
-                if (parts.length != 3) {
+                if (parts.length != MAX_INPUT_VALUE) {
                     System.out.println("Bad parameters!");
-                }else{
+                } else {
                     player1 = createPlayer(parts[1], 'X');
                     player2 = createPlayer(parts[2], 'O');
 
@@ -38,7 +44,7 @@ public class Main {
 
         boolean turn1 = true;
         while (game.checkWin().equals("Game not finished")) {
-            if (turn1){
+            if (turn1) {
                 player1.makeMove(game.getBoard());
                 game.printBoard();
                 turn1 = false;
@@ -56,7 +62,7 @@ public class Main {
             case "user":
                 return new UserPlayer(symbol);
             case "easy":
-                return new AIPlayerEasy(symbol);
+                return new AIPlayerEasy(symbol, new Random());
             case "medium":
                 return new AiPlayerMedium(symbol);
             case "hard":
